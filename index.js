@@ -1,7 +1,7 @@
 const dotsInRow = IMG[0].length;
 const dotConf = {
   N: dotsInRow * IMG.length,
-  r: (window.innerWidth / 4) / dotsInRow,
+  r: (window.innerWidth / 3) / dotsInRow,
   dotsInRow,
   cpadding: 1,
   trimRow: true

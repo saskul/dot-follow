@@ -32,12 +32,13 @@ namespace bmp2json {
   vector<vector<uint> > getBrightPixelMatrix(bitmap_image *img) {
     const uint height = img -> height();
     const uint width = img -> width();
+    cout << endl << height << " " << width << endl << endl;
     vector<vector<uint>> bright_pixel_matrix;
 
-    for (size_t i = 0; i < height; ++i) {
+    for (size_t i = 0; i < height; i++) {
       vector<uint> bright_pixel_matrix_row;
 
-      for (size_t j = 0; j < width; ++j) {
+      for (size_t j = 0; j < width; j++) {
         rgb_t colour;
         img -> get_pixel(j, i, colour);
         uint brightness = (colour.red + colour.green + colour.blue);
@@ -58,16 +59,16 @@ namespace bmp2json {
 
     vector<vector<uint>> row_reduced_matrix;
 
-    for (uint i = 0; i < height; ++i) {
+    for (uint i = 0; i < height; i++) {
 
       vector<uint> row_reduced_matrix_row;
       float brightness_sum = 0;
 
-      for (uint j = 0; j < width; ++j) {
+      for (uint j = 0; j < width; j++) {
         float brightness = matrix[i][j];
         brightness_sum += brightness;
 
-        if (j % divisor == 0) {
+        if (j && j % divisor == 0) {
           row_reduced_matrix_row.push_back(brightness_sum);
           brightness_sum = 0;
         }
@@ -136,13 +137,13 @@ namespace bmp2json {
   // Forms a long concatenated string of brackets and brightness values
   // to form JSON array and returns the output as a string
   string matrixToJsonString(vector<vector<float>> *matrix) {
-    string json_array = "[\n";
+    string json_array = "const IMG = [\n";
 
-    for (uint i = 0; i < matrix -> size(); i++) {
+    for (uint i = 0; i < matrix -> size(); ++i) {
       json_array += "[\n";
 
       vector<float> *v = &matrix -> at(i);
-      for (uint j = 0; j < v -> size(); j++) {
+      for (uint j = 0; j < v -> size(); ++j) {
 
         std::ostringstream streamObj;
         streamObj << std::fixed;
