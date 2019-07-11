@@ -1,7 +1,7 @@
 const dotsInRow = IMG[0].length;
 const dotConf = {
   N: dotsInRow * IMG.length,
-  r: (window.innerWidth / 3) / dotsInRow,
+  r: (window.innerWidth / 4) / dotsInRow,
   dotsInRow,
   cpadding: 1,
   trimRow: true
@@ -10,7 +10,7 @@ const dotConf = {
 const dots = function(N, r, dotsInRow, trimRow) {
   const { innerWidth, innerHeight } = window;
   const dotsInRowFloat = innerWidth / (r * 2);
-  const margin = 0;//(dotsInRowFloat - dotsInRow) * r;
+  const margin = (dotsInRowFloat - dotsInRow) * r;
   let total = N;
 
   /*  TO-DO: function to get maximum number of dots
@@ -25,7 +25,7 @@ const dots = function(N, r, dotsInRow, trimRow) {
   for(let i = 0; i < total; i++) {
     const row = Math.floor(i / dotsInRow);
     const offsetWidth = dotsInRow * r * 2 * row - margin;
-    const offsetHeight = margin;
+    const offsetHeight = 0;//margin;
     const perc = i / (N - 1);
     const color = Math.floor(perc * 255);
     const dot = {
@@ -45,8 +45,8 @@ const circles = function (N, r, cpadding, trimRow) {
     .data(dots)
     .enter()
     .append('circle')
-    .attr('cx', function({cx}) { return cx; })
-    .attr('cy', function({cy}) { return cy; })
+    .attr('cx', function({cx}) { return cx + Math.random() * 10; })
+    .attr('cy', function({cy}) { return cy; })// + Math.random() * 10; })
     .attr('r', function({r}) { return r - cpadding; })
     .attr('fill', function({fill}) { return fill; })
 }(
@@ -64,8 +64,7 @@ const newDotsFill = dots.map((dot, i) => {
 
 circles
   .transition()
-  .delay(function() { return Math.random() * 1000; })
+  .delay(function() { return Math.random() * 1000 + 1000; })
   .duration(function() { return Math.random() * 2000; })
-  .attr('fill', function(n, i) {
-    return newDotsFill[i];
-  });
+  .attr('fill', function(n, i) { return newDotsFill[i]; })
+  .attr('cx', function({cx}) { return cx; });

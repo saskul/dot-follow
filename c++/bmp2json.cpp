@@ -32,7 +32,6 @@ namespace bmp2json {
   vector<vector<uint> > getBrightPixelMatrix(bitmap_image *img) {
     const uint height = img -> height();
     const uint width = img -> width();
-    cout << endl << height << " " << width << endl << endl;
     vector<vector<uint>> bright_pixel_matrix;
 
     for (size_t i = 0; i < height; i++) {
