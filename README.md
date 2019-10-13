@@ -6,7 +6,7 @@ It's a Single-page Application which displays a 2-dimensional array of dots (col
 ## C++ bmp2json module
 The backbone of the project - transformation from bmp to json - is carried by C++ module, which is wrapped in Napi class to be implemented in Node.js with ease. JavaScript module consists of a single function:
 
-`bmp2json( string src, int divisor)`
+`bmp2json(string src, int divisor)`
 
 - src - the path of the bmp file to be converted
 - divisor - the magnitude of data scaling. If picture is 512x512 then the divisor value of 2 will mean that the resulting array will be 256x256 in length, 4 - 128x128 and so on.
