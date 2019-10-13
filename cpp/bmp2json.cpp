@@ -136,10 +136,10 @@ namespace bmp2json {
   // Forms a long concatenated string of brackets and brightness values
   // to form JSON array and returns the output as a string
   string matrixToJsonString(vector<vector<float>> *matrix) {
-    string json_array = "const IMG = [\n";
+    string json_array = "[";
 
     for (uint i = 0; i < matrix -> size(); ++i) {
-      json_array += "[\n";
+      json_array += "[";
 
       vector<float> *v = &matrix -> at(i);
       for (uint j = 0; j < v -> size(); ++j) {
@@ -154,18 +154,18 @@ namespace bmp2json {
           json_array += rounded_brightness;
         }
         else {
-          json_array += rounded_brightness + ", ";
+          json_array += rounded_brightness + ",";
         }
       }
 
       if (i == matrix -> size() - 1) {
-        json_array += "\n]";
+        json_array += "]";
       }
       else {
-        json_array += "\n],\n";
+        json_array += "],";
       }
     }
-    json_array += "\n]";
+    json_array += "]";
 
     return json_array;
   }
@@ -184,12 +184,28 @@ namespace bmp2json {
     return matrixToJsonString(&output_matrix);
   }
 
+  vector<vector<float>> bitmapImageToVectorMatrix(string input, uint divisor) {
+    bitmap_image img = getImg(input);
+    vector<vector<uint>> pixel_matrix = getBrightPixelMatrix(&img);
+
+    reduceMatrixRows(pixel_matrix, divisor);
+    transposeMatrix(pixel_matrix);
+    reduceMatrixRows(pixel_matrix, divisor);
+    transposeMatrix(pixel_matrix);
+
+    return getDivMatrix(pixel_matrix, divisor);
+  }
+
   void saveToFile(string filename, string *input) {
     string output_src = filename;
     ofstream OutputFile;
     OutputFile.open(output_src);
     OutputFile << *input;
     OutputFile.close();
+  }
+
+  void testHeaderFunc() {
+    cout << endl << "It works" << endl;
   }
   //////////////////////////////////////////////////////////////////////////////
 }
