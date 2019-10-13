@@ -1,5 +1,3 @@
-const bmp2json = require('./build/Release/bmp2json.node');
+const bmp2json = require('bmp2json').bmp2json;
 
-console.log(typeof bmp2json.convert('cpp/input.bmp', 6))
-
-module.exports = bmp2json;
+console.table(bmp2json('./img.bmp', 6));
