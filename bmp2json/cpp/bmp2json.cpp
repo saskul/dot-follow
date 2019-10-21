@@ -29,7 +29,10 @@ namespace bmp2json {
 
   // Returns the two dimensional vector matrix
   // in which RGB values are summed
-  vector<vector<uint> > getBrightPixelMatrix(bitmap_image *img) {
+  vector<vector<uint>> getBrightPixelMatrix(
+    bitmap_image *img,
+    string targetColour
+  ) {
     const uint height = img -> height();
     const uint width = img -> width();
     vector<vector<uint>> bright_pixel_matrix;
@@ -40,7 +43,18 @@ namespace bmp2json {
       for (size_t j = 0; j < width; j++) {
         rgb_t colour;
         img -> get_pixel(j, i, colour);
-        uint brightness = (colour.red + colour.green + colour.blue);
+
+        uint brightness;
+
+        if (targetColour == "red") {
+          brightness = colour.red;
+        } else if (targetColour == "blue") {
+          brightness = colour.blue;
+        } else if (targetColour == "green") {
+          brightness = colour.green;
+        } else {
+          brightness = (colour.red + colour.green + colour.blue);
+        }
 
         bright_pixel_matrix_row.push_back(brightness);
       }
@@ -171,9 +185,16 @@ namespace bmp2json {
   }
 
   //  Calls above methods to produce json array string
-  string bitmapImageToJsonArray(string input, uint divisor) {
+  string bitmapImageToJsonArray(
+    string input,
+    uint divisor,
+    string targetColour=""
+  ) {
     bitmap_image img = getImg(input);
-    vector<vector<uint>> pixel_matrix = getBrightPixelMatrix(&img);
+    vector<vector<uint>> pixel_matrix = getBrightPixelMatrix(
+      &img,
+      targetColour
+    );
 
     reduceMatrixRows(pixel_matrix, divisor);
     transposeMatrix(pixel_matrix);
@@ -184,9 +205,16 @@ namespace bmp2json {
     return matrixToJsonString(&output_matrix);
   }
 
-  vector<vector<float>> bitmapImageToVectorMatrix(string input, uint divisor) {
+  vector<vector<float>> bitmapImageToVectorMatrix(
+    string input,
+    uint divisor,
+    string targetColour
+  ) {
     bitmap_image img = getImg(input);
-    vector<vector<uint>> pixel_matrix = getBrightPixelMatrix(&img);
+    vector<vector<uint>> pixel_matrix = getBrightPixelMatrix(
+      &img,
+      targetColour
+    );
 
     reduceMatrixRows(pixel_matrix, divisor);
     transposeMatrix(pixel_matrix);

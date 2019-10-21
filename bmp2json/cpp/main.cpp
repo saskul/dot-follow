@@ -37,12 +37,17 @@ Napi::String Convert(const Napi::CallbackInfo& info) {
 
   const string INPUT_IMG_SRC = info[0].As<Napi::String>();
   const uint DIVISOR = info[1].As<Napi::Number>();
+  const string TARGET_COLOUR = info[2].As<Napi::String>();
 
   // vector<vector <float>> brightVectArr = bmp2json::bitmapImageToVectorMatrix(
   //   INPUT_IMG_SRC, DIVISOR
   // );
 
-  string brightArr = bmp2json::bitmapImageToJsonArray(INPUT_IMG_SRC, DIVISOR);
+  string brightArr = bmp2json::bitmapImageToJsonArray(
+    INPUT_IMG_SRC,
+    DIVISOR,
+    TARGET_COLOUR
+  );
   Napi::String output = Napi::String::New(env, brightArr);
 
   return output;
