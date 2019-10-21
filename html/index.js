@@ -1,4 +1,4 @@
-const MIN_QUALITY=1;
+const MIN_QUALITY=5;
 const MAX_QUALITY=100;
 var quality = 10;
 var dots, newDotsFill, circles;
@@ -39,10 +39,10 @@ function reset() {
 
 function onQualityChange(value) {
   if (value < MIN_QUALITY) {
-    document.getElementById('quality-input').value = 1;
+    document.getElementById('quality-input').value = MIN_QUALITY;
   }
   else if (value > MAX_QUALITY) {
-    document.getElementById('quality-input').value = 10;
+    document.getElementById('quality-input').value = MAX_QUALITY;
   }
   else if (value*10%10 !== 0) {
     document.getElementById('quality-input').value = Math.floor(value);
