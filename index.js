@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-const bmp2json = require('bmp2json').bmp2json;
+const bmp2json = require('bmp2json');
 
 const app = express();
 
@@ -15,8 +15,7 @@ const SIZE_LIMITS = {
   json: '10mb',
   urlencoded: '1mb',
   fileUpload: 50 * 1024 * 1024
-}
-
+};
 
 //  MIDDLEWARES ////////////////////////////////////////////////////////////////
 app.use(bodyParser.json({
@@ -32,17 +31,26 @@ app.use(fileUpload({
 
 //  API ////////////////////////////////////////////////////////////////////////
 const api = express.Router();
-api.post('/upload', function(req, res) {
-  console.log(req.files.foo);
-  // console.table(bmp2json('./img.bmp', 6));
-});
+
+api.get('/vader', function(req, res) {
+  try {
+    const { quality } = req.query;
+    const json = bmp2json.getBrightPixelMatrix(
+      path.join(__dirname+'/gallery/vader.bmp'),
+      Number(quality)
+    );
+    res.json(json);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 
 //  CLIENT  ////////////////////////////////////////////////////////////////////
-app.use(express.static(path.join(__dirname+'/client/build')));
+app.use(express.static(path.join(__dirname+'/html')));
 app.use('/api', api);
 app.get('*', function(req,res) {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'/html/index.html'));
 });
 
 app.listen(PORT, () => console.log(`\nServer is listening on port ${PORT}`));

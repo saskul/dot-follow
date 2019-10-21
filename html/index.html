@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="index.css" />
+  <script src="d3/d3.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <div class="controls">
+    <button id="play-btn" onClick={play()}>Play</button>
+    <button id="reset-btn" onClick={reset()}>Reset</button>
+    <br />
+    Quality (<label id="min-quality"></label> to <label id="max-quality"></label>): <input id="quality-input" type="number" value="10" onchange="onQualityChange(this.value)" min="1" max="50" step="1" />
+  </div>
+  <svg class="d3__wrapper" />
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
