@@ -1,5 +1,5 @@
 # Dot-Follow
-Node-gyp study, consisting of C++, Node.js and static website with d3. Express server analyzes BMP image using low-level bitmap library, and serves it to the front-end to produce cool transition of circles changing their brightness to match the target. User can change the quality - number of dots used to represent the picture.
+Node-gyp study, consisting of C++, Node.js and static website with d3. Express server analyzes BMP image using low-level bitmap library by [Arash Partow](http://partow.net/programming/bitmap/index.html) which only supports 24-bits per pixel bitmap format files, and serves it to the front-end to produce cool transition of circles changing their brightness to match the target. User can change the quality - number of dots used to represent the picture.
 
 ## C++ bmp2json module
 The backbone of the project - transformation from bmp to array of integers - is carried by the C++ module, which is wrapped in Napi class. Making it into the JavaScript module I've produced the following functions:
