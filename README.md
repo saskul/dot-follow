@@ -1,8 +1,8 @@
 # Dot-Follow
-Node-gyp study, consisting of C++, Node.js and static website with d3. Express server analyzes BMP image using low-level bitmap library by [Arash Partow](http://partow.net/programming/bitmap/index.html) which only supports 24-bits per pixel bitmap format files, and serves it to the front-end to produce cool transition of circles changing their brightness to match the target. User can change the quality - number of dots used to represent the picture.
+Node-gyp study, consisting of C++, Node.js and static website with d3. Express server analyzes BMP image using bitmap library by [Arash Partow](http://partow.net/programming/bitmap/index.html) which only supports 24-bits per pixel bitmap format files, and serves it to the front-end to produce cool transition of circles changing their brightness to match the target. User can change the quality - number of dots used to represent the picture.
 
 ## C++ bmp2json module
-The backbone of the project - transformation from bmp to array of integers - is carried by the C++ module, which is wrapped in Napi class. Making it into the JavaScript module I've produced the following functions:
+The backbone of the project - transformation from bmp to array of integers - is carried by the C++ module, which is wrapped in Napi class. Making it into the JavaScript module with the following functions:
 
 `getBrightPixelMatrix (string src, int divisor, string colour)` - Returns 2-D array of float numbers, which represent either summed red, green and blue values or just brightness of a single colour if it's specified.
 - `src` - the path of the bmp file to be converted relative to the project root.
@@ -15,7 +15,7 @@ The backbone of the project - transformation from bmp to array of integers - is 
 
 
 ## D3 website
-The transition part is carried with the help of d3 library and is simple and minimal to show the back-end capabilities in practice without overdo.
+The view element is carried out by a static website with d3.js
 
 ![](dot-follow-play.gif)
 
