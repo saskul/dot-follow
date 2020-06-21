@@ -1,5 +1,4 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const path = require('path');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
@@ -9,7 +8,6 @@ const app = express();
 
 
 //  CONFIG  ////////////////////////////////////////////////////////////////////
-dotenv.config();
 const { PORT } = process.env;
 const SIZE_LIMITS = {
   json: '10mb',
@@ -49,8 +47,15 @@ api.get('/vader', function(req, res) {
 //  CLIENT  ////////////////////////////////////////////////////////////////////
 app.use(express.static(path.join(__dirname+'/html')));
 app.use('/api', api);
-app.get('*', function(req,res) {
+app.get('/', function(req,res) {
   res.sendFile(path.join(__dirname+'/html/index.html'));
 });
 
-app.listen(PORT, () => console.log(`\nServer is listening on port ${PORT}`));
+try {
+	if (!process.env.PORT) throw new Error("Set PORT environment variable");
+	app.listen(PORT, () => console.log(`\nServer is listening on port ${PORT}`));
+} catch(err) {
+	console.error(err);
+}
+
+

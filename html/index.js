@@ -3,12 +3,13 @@ const MAX_QUALITY=100;
 var quality = 10;
 var dots, newDotsFill, circles;
 
-document.getElementById('min-quality').innerHTML = MIN_QUALITY;
-document.getElementById('max-quality').innerHTML = MAX_QUALITY;
+console.log(`API_BASE_URL is set to ${process.env.API_BASE_URL}`);
+
+
 
 async function getJsonBitmap() {
   const quality = document.getElementById('quality-input').value;
-  return await fetch(`http://localhost:3000/api/vader?quality=${quality}`);
+  return await fetch(`/api/vader?quality=${quality}`);
   document.getElementById('play-btn').removeAttribute("disabled");
   document.getElementById('reset-btn').removeAttribute("disabled");
 }
@@ -126,5 +127,20 @@ function fetchAndPrep() {
     console.error(err);
   });
 }
+
+document.getElementById('min-quality').innerHTML = MIN_QUALITY;
+document.getElementById('max-quality').innerHTML = MAX_QUALITY;
+document.getElementById('play-btn').onclick = function() {
+	play();
+};
+
+document.getElementById('reset-btn').onclick = function() {
+	reset();
+};
+
+document.getElementById('quality-input').onchange = function() {
+	onQualityChange(document.getElementById('quality-input').value);
+};
+document.getElementById('reset-btn').innerHTML = MAX_QUALITY;
 
 fetchAndPrep();

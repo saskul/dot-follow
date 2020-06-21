@@ -8,7 +8,7 @@
     "start": "node index.js",
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean",
-    "test":  "node -e 'console.log(require(\"./index\").bmp2json(\"./cpp/input.bmp\", 6))'"
+    "test": "node -e 'console.log(require(\"./index\").bmp2json(\"./cpp/input.bmp\", 6))'"
   },
   "repository": {
     "type": "git",

@@ -6,12 +6,12 @@
 </head>
 <body>
   <div class="controls">
-    <button id="play-btn" onClick={play()}>Play</button>
-    <button id="reset-btn" onClick={reset()}>Reset</button>
+    <button id="play-btn">Play</button>
+    <button id="reset-btn">Reset</button>
     <br />
-    Quality (<label id="min-quality"></label> to <label id="max-quality"></label>): <input id="quality-input" type="number" value="5" onchange="onQualityChange(this.value)" step="1" />
+    Quality (<label id="min-quality"></label> to <label id="max-quality"></label>): <input id="quality-input" type="number" value="5" step="1" />
   </div>
   <svg class="d3__wrapper" />
-  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="bundle.js"></script>
 </body>
 </html>
