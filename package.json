@@ -13,7 +13,7 @@
     "bmp2json": "file:bmp2json",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.6-alpha.5",
+    "express-fileupload": "^1.1.9",
     "jimp": "^0.8.5"
   },
   "devDependencies": {
